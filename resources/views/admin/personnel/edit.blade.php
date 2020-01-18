@@ -39,8 +39,6 @@
     @method('PATCH')
 <div class="form_container">
 
-
-
         <!--div class="form-group">
         <label class="col-md-4 control-label">Full Name</label>
         <div class="col-md-8 inputGroupContainer">
@@ -119,7 +117,7 @@
                     <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >جنسیت</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" name="genderType" >
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0" >انتخاب کنید</option>
                             <option value="1" {{ ($data->GenderType == 1) ? "selected" : "" }}>مرد</option>
                             <option value="2" {{ ($data->GenderType == 2) ? "selected" : "" }}>زن</option>
                         </select>
@@ -132,7 +130,7 @@
                     <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >وضعیت تاهل</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" name="maritalStatus" >
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0" >انتخاب کنید</option>
                             <option value="1" {{ ($data->GenderType == 1) ? "selected" : "" }}>مجرد</option>
                             <option value="2" {{ ($data->GenderType == 2) ? "selected" : "" }}>متاهل</option>
                         </select>
@@ -145,7 +143,7 @@
                     <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" > تحصیلات</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm">
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0" >انتخاب کنید</option>
                             <option value="1" {{ ($data->GenderType == 1) ? "selected" : "" }}>لیسانس</option>
                             <option value="2" {{ ($data->GenderType == 2) ? "selected" : "" }}>فوق لیسانس</option>
                             <option value="3" {{ ($data->GenderType == 3) ? "selected" : "" }}>دکترا</option>
@@ -200,7 +198,7 @@
                     <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نوع استخدام</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" name="employmentType">
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0" >انتخاب کنید</option>
                             <option value="1" {{ ($data->EmploymentType == 1) ? "selected" : "" }}>رسمی</option>
                             <option value="2" {{ ($data->EmploymentType == 2) ? "selected" : "" }}>پیمانی</option>
                             <option value="3" {{ ($data->EmploymentType == 3) ? "selected" : "" }}>قراردادی</option>

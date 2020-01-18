@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlaceTable extends Migration
+class CreateNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreatePlaceTable extends Migration
      */
     public function up()
     {
-        Schema::create('Place', function (Blueprint $table) {
+        Schema::create('News', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Title');
-            $table->integer('StateCity_ID')->nullable();
-            $table->string('Phone',50)->nullable();
-            $table->string('Address')->nullable();
-            $table->string('EntryTime',50)->nullable();
-            $table->string('ExitTime',50)->nullable();
-            $table->integer('NegativeEffectDuration')->nullable();
+            $table->string('Date')->nullable();
+            $table->string('Subject')->nullable();
+            $table->smallInteger('PermissionType')->nullable();
             $table->string('Description')->nullable();
+            $table->boolean('IsActive')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreatePlaceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Place');
+        Schema::dropIfExists('News');
     }
 }

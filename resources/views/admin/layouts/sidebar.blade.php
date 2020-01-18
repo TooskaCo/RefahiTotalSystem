@@ -35,7 +35,7 @@
             <a href="{{ route('personnel.index') }}" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">پرسنل</span>
             </a>
-            <a href="index.php?page=news_list.html" class="list-group-item list-group-item-action bg-submenu ">
+            <a href="{{ route('news.index') }}" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">اخبار</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action bg-submenu ">

@@ -112,7 +112,7 @@
                     <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >جنسیت</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" name="genderType">
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0">انتخاب کنید</option>
                             <option value="1">مرد</option>
                             <option value="2">زن</option>
                         </select>
@@ -125,7 +125,7 @@
                     <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >وضعیت تاهل</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" name="maritalStatus">
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0">انتخاب کنید</option>
                             <option value="1">مجرد</option>
                             <option value="2">متاهل</option>
                         </select>
@@ -138,7 +138,7 @@
                     <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" > تحصیلات</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" >
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0" >انتخاب کنید</option>
                             <option value="1">لیسانس</option>
                             <option value="2">فوق لیسانس</option>
                             <option value="3">دکترا</option>
@@ -193,7 +193,7 @@
                     <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نوع استخدام</label>
                     <div class="col-md-8">
                         <select class="custom-select custom-select-sm" name="employmentType">
-                            <option selected>انتخاب کنید</option>
+                            <option selected value="0" >انتخاب کنید</option>
                             <option value="1">رسمی</option>
                             <option value="2">پیمانی</option>
                             <option value="3">قراردادی</option>

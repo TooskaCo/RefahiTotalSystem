@@ -28,6 +28,7 @@ Route::resource('/admin/personnel','PersonnelController');
 //Route::get('/admin/personnel/list', 'PersonnelController@index')->name('personnel.list');
 
 
+Route::resource('/admin/news','NewsController');
 Route::resource('/admin/place','PlaceController');
 Route::resource('/admin/period','PeriodController');
 Route::resource('/admin/quota','QuotaController');
