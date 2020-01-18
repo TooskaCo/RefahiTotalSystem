@@ -99,7 +99,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-calendar-alt cursor-pointer" id='icoBirthDate'></span></span>
                         </div>
-                        <input type="text" name="birthDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
+                        <input type="text" name="birthDate" id="txtBirthDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-calendar-alt cursor-pointer" id='icoEstekhdamDate'></span></span>
                         </div>
-                        <input type="text" name='cooperationStartDate' class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
+                        <input type="text" id="txtEstekhdamDate" name='cooperationStartDate' class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
                     </div>
                 </div>
             </div>
