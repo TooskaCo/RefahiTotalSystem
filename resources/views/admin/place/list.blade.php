@@ -50,54 +50,30 @@
                 </tr>
                 </thead>
                 <tbody>
+                @php
+                    $index = 1 ;
+                @endphp
+                @foreach($data as $row)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>مجتمع لاله</td>
-                    <td>اصفهان / اصفهان</td>
-                    <td>09123325689</td>
+                    <th scope="row">{{ $index++ }}</th>
+                    <td>{{ $row->Title }}</td>
+                    <td>{{ $row->StateCity_ID }}</td>
+                    <td>{{ $row->Phone }}</td>
                     <td>
-                        <a href="{{ route('place.create') }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
+                        <form action="{{ route('place.destroy', $row->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <a href="{{ route('place.edit', $row->id) }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
+                            <button type="submit" class="btn btn-danger btn-sm"><span id="collapse-icon" class="fa fa-trash" ></span></button>
+                        </form>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>مجتمع پارسه</td>
-                    <td>فارس / شیراز</td>
-                    <td>09123325689</td>
-                    <td>
-                        <a href="{{ route('place.create') }}" style="color: #333333"><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>مجتمع نگین</td>
-                    <td>خراسان رضوی / مشهد</td>
-                    <td>09123325689</td>
-                    <td>
-                        <a href="{{ route('place.create') }}" style="color: #333333"><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
-                </li>
-                <!--li class="page-item"><a class="page-link" href="#">1</a></li-->
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                </li>
-                <!--li class="page-item"><a class="page-link" href="#">3</a></li-->
-                <li class="page-item">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">بعدی</a>
-                </li>
-            </ul>
-        </nav>
+        {!! $data->links() !!}
 
     </div>
 

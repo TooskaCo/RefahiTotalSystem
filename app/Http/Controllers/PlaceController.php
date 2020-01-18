@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Personnel;
+use App\Place;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
@@ -13,7 +15,10 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        return view('admin.place.list');
+        //return view('admin.place.list');
+        $data = Place::latest()->paginate(5);
+        return view('admin.place.list',compact('data'))
+            ->with('i', (request()->input('page',1)-1)*5);
     }
 
     /**
@@ -34,7 +39,31 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        $request->validate([
+            'title'    =>  'required'
+        ]);
+
+        $form_data = array(
+            //'id'=>1,
+            'Title'       =>   $request->title,
+            'StateCity_ID'        =>   $request->stateCity_ID,
+            'Phone' => $request->phone,
+            'Address' => $request->address,
+            'EntryTime' => $request->entryTime,
+            'ExitTime'=> $request->exitTime,
+            'NegativeEffectDuration'=> $request->negativeEffectDuration,
+            'Description'=> $request->description,
+        );
+
+        Place::create($form_data);
+
+        return redirect('admin\place')->with('success', 'اطلاعات با موفقیت ثبت شد');
+
+        /* $resource = Model::create($request->all());
+
+         return redirect()->route('resource.edit', $resource->id);*/
     }
 
     /**
@@ -58,7 +87,9 @@ class PlaceController extends Controller
     {
        //$data = Personnel::findOrFail($id);
        // return view('admin.personnel.edit', compact('data'));
-        return view('admin.place.edit');
+
+        $data = Place::findOrFail($id);
+        return view('admin.place.edit', compact('data'));
     }
 
     /**
@@ -70,7 +101,28 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        {
+            $request->validate([
+                'title'    =>  'required',
+            ]);
+        }
+
+        $form_data = array(
+            'Title'       =>   $request->title,
+            'StateCity_ID'        =>   $request->stateCity_ID,
+            'Phone' => $request->phone,
+            'Address' => $request->address,
+            'EntryTime' => $request->entryTime,
+            'ExitTime'=> $request->exitTime,
+            'NegativeEffectDuration'=> $request->negativeEffectDuration,
+            'Description'=> $request->description,
+        );
+
+        Place::whereId($id)->update($form_data);
+        //return redirect('admin/personnel')->with('success', 'اطلاعات با موفقیت ویرایش شد');
+        return redirect()->route('place.edit', $id)->with('success', 'اطلاعات با موفقیت ویرایش شد');
+
     }
 
     /**
@@ -81,6 +133,8 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Place::findOrFail($id);
+        $data->delete();
+        return redirect('admin/place')->with('success', 'اطلاعات با موفقیت حذف شد');
     }
 }

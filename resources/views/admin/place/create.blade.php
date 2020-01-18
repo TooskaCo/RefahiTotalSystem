@@ -27,7 +27,7 @@
         <button type="button" class="btn btn-primary">ذخیره</button>
         <button type="button" class="btn btn-primary">لیست</button>
 </div-->
-<form class="well form-horizontal" method="post" action="" enctype="multipart/form-data">
+<form class="well form-horizontal" method="post" action="{{ route('place.store') }}" enctype="multipart/form-data">
     @csrf
 <div class="form_container">
 
@@ -44,7 +44,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left pr-0" >عنوان</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="">
                 </div>
             </div>
         </div>
@@ -57,13 +57,13 @@
             <div class="row" >
                 <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >استان</label>
                 <div class="col-md-8">
-                    <select class="custom-select custom-select-sm">
-                        <option selected>انتخاب کنید</option>
+                    <select class="custom-select custom-select-sm" name="stateCity_ID1111">
+                        <option selected value="0">انتخاب کنید</option>
                         <option value="1">تهران</option>
                         <option value="2">البرز</option>
-                        <option value="2">شیراز</option>
-                        <option value="2">خراسان رضوی</option>
-                        <option value="2">اصفهان</option>
+                        <option value="3">شیراز</option>
+                        <option value="4">خراسان رضوی</option>
+                        <option value="5">اصفهان</option>
                     </select>
                 </div>
             </div>
@@ -73,12 +73,12 @@
             <div class="row" >
                 <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >شهر</label>
                 <div class="col-md-8">
-                    <select class="custom-select custom-select-sm">
-                        <option selected>انتخاب کنید</option>
+                    <select class="custom-select custom-select-sm" name="stateCity_ID">
+                        <option selected value="0">انتخاب کنید</option>
                         <option value="1">تهران</option>
                         <option value="2">دماوند</option>
-                        <option value="2">شهریار</option>
-                        <option value="2">شهرری</option>
+                        <option value="3">شهریار</option>
+                        <option value="4">شهرری</option>
                     </select>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-phone" ></span></span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="به همراه کد">
+                    <input type="text" class="form-control" name="phone" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="به همراه کد">
                 </div>
 
             </div>
@@ -105,7 +105,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left pr-0" >آدرس</label>
                 <div class="col-md-10">
-                    <textarea class="form-control" rows="1"></textarea>
+                    <textarea class="form-control" name="address" rows="1"></textarea>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-clock-o" ></span></span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="" placeholder="14:00">
+                    <input type="text" class="form-control" name="entryTime" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="" placeholder="14:00">
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-clock-o" ></span></span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="" placeholder="12:00">
+                    <input type="text" class="form-control" name="exitTime"  aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="" placeholder="12:00">
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left pr-0" >نمره منفی</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control form-control-sm col-md-4" style="display:inline !important" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm col-md-4" style="display:inline !important" name="negativeEffectDuration" value="">
                     <small  class="text-muted">
                         بازه نمره منفی استفاده از مکان
                     </small>
@@ -160,7 +160,7 @@
             <div class="row" >
                 <label for="address" class="col-md-2 col-form-label text-md-right text-sm-left pr-0" >توضیحات</label>
                 <div class="col-md-10">
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" rows="3" name="description" ></textarea>
                 </div>
             </div>
         </div>
