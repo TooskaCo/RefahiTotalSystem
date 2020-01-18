@@ -17,15 +17,15 @@ Route::get('/', function () {
 
 Route::get('/admin/dashboard', function () {
     return view('/admin/dashboard');
-});
+})->name('admin.dashboard');;
 
 /*Route::get('/admin/personnel/new', function () {
     return view('admin.personnel.new');
 });*/
 
 Route::resource('/admin/personnel','PersonnelController');
-//Route::post('/admin/personnel', 'PersonnelController@store')->name('personnel.add');;
-//Route::get('/admin/personnel/list', 'PersonnelController@index')->name('personnel.list');;
+//Route::post('/admin/personnel', 'PersonnelController@store')->name('personnel.add');
+//Route::get('/admin/personnel/list', 'PersonnelController@index')->name('personnel.list');
 
 
 Route::resource('/admin/place','PlaceController');
