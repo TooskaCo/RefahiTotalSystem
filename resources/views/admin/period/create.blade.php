@@ -29,7 +29,7 @@
         <button type="button" class="btn btn-primary">ذخیره</button>
         <button type="button" class="btn btn-primary">لیست</button>
 </div-->
-<form class="well form-horizontal" method="post" action="" enctype="multipart/form-data">
+<form class="well form-horizontal" method="post" action="{{ route('period.store') }}" enctype="multipart/form-data">
     @csrf
 <div class="form_container">
 
@@ -46,7 +46,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left pr-1" >عنوان</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="">
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoStartDate"></span></span>
                     </div>
-                    <input type="text" id="txtStartDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtStartDate" name="startDate"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoEndDate"></span></span>
                     </div>
-                    <input type="text" id="txtEndDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtEndDate" name="endDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoReserveStartDate" ></span></span>
                     </div>
-                    <input type="text" id="txtReserveStartDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtReserveStartDate" name="reserveStartDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoReserveEndDate" ></span></span>
                     </div>
-                    <input type="text" id="txtReserveEndDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtReserveEndDate" name="reserveEndDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoLotteryDate"></span></span>
                     </div>
-                    <input type="text" id="txtLotteryDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtLotteryDate" name="lotteryDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>

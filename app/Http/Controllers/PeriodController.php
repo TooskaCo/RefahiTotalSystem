@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Period;
 use Illuminate\Http\Request;
 
 class PeriodController extends Controller
@@ -13,7 +14,9 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        return view('admin.period.list');
+        $data = Period::latest()->paginate(5);
+        return view('admin.period.list',compact('data'))
+            ->with('i', (request()->input('page',1)-1)*5);
     }
 
     /**
@@ -34,7 +37,26 @@ class PeriodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        $request->validate([
+            'title'    =>  'required'
+        ]);
+
+        $form_data = array(
+            //'id'=>1,
+            'Title'       =>   $request->title,
+            'StartDate'        =>   $request->startDate,
+            'EndDate' => $request->endDate,
+            'ReserveStartDate' => $request->reserveStartDate,
+            'ReserveEndDate' => $request->reserveEndDate,
+            'LotteryDate'=> $request->lotteryDate,
+        );
+
+        Period::create($form_data);
+
+        return redirect('admin\period')->with('success', 'اطلاعات با موفقیت ثبت شد');
+
     }
 
     /**
@@ -56,7 +78,8 @@ class PeriodController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Period::findOrFail($id);
+        return view('admin.period.edit', compact('data'));
     }
 
     /**
@@ -68,7 +91,25 @@ class PeriodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        {
+            $request->validate([
+                'title'    =>  'required',
+            ]);
+        }
+
+        $form_data = array(
+            'Title'       =>   $request->title,
+            'StartDate'        =>   $request->startDate,
+            'EndDate' => $request->endDate,
+            'ReserveStartDate' => $request->reserveStartDate,
+            'ReserveEndDate' => $request->reserveEndDate,
+            'LotteryDate'=> $request->lotteryDate,
+        );
+
+        Period::whereId($id)->update($form_data);
+        //return redirect('admin/personnel')->with('success', 'اطلاعات با موفقیت ویرایش شد');
+        return redirect()->route('period.edit', $id)->with('success', 'اطلاعات با موفقیت ویرایش شد');
     }
 
     /**
@@ -79,6 +120,8 @@ class PeriodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Period::findOrFail($id);
+        $data->delete();
+        return redirect('admin/period')->with('success', 'اطلاعات با موفقیت حذف شد');
     }
 }

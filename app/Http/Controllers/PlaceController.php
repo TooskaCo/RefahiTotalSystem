@@ -122,7 +122,6 @@ class PlaceController extends Controller
         Place::whereId($id)->update($form_data);
         //return redirect('admin/personnel')->with('success', 'اطلاعات با موفقیت ویرایش شد');
         return redirect()->route('place.edit', $id)->with('success', 'اطلاعات با موفقیت ویرایش شد');
-
     }
 
     /**

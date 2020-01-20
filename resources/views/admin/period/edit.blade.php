@@ -5,6 +5,7 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('components/PersianCalender/src/jquery.md.bootstrap.datetimepicker.style.css') }}" />
+
 @if ($message = Session::get('success'))
     <div class="alert alert-success mt-2">
         <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
@@ -24,8 +25,8 @@
 
 
 <div class="form_header bg-info">
-    <span id="collapse-icon" class="fa fa-user fa-2x mr-2" ></span>
-    <span class="h5"> بانک پرسنل</span>
+    <span id="collapse-icon" class="fa fa-calendar-alt fa-2x mr-2" ></span>
+    <span class="h5">دوره</span>
     <!--button type="button" class="btn bg-white float-left mx-2">ذخیره</button>
     <button type="button" class="btn btn-success float-left mx-2 ">لیست</button-->
 </div>
@@ -34,224 +35,95 @@
         <button type="button" class="btn btn-primary">ذخیره</button>
         <button type="button" class="btn btn-primary">لیست</button>
 </div-->
-<form class="well form-horizontal" method="post" action="{{ route('personnel.update', $data->id) }}" enctype="multipart/form-data">
+<form class="well form-horizontal" method="post" action="{{ route('period.update', $data->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
 <div class="form_container">
 
-
-
-        <!--div class="form-group">
-        <label class="col-md-4 control-label">Full Name</label>
-        <div class="col-md-8 inputGroupContainer">
-            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="fullName" name="fullName" placeholder="Full Name" class="form-control" required="true" value="" type="text"></div>
-        </div>
-        </div-->
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نام</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control form-control-sm" name="firstName" value="{{ $data->FirstName }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نام خانوادگی</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control form-control-sm" name="lastName" value="{{ $data->LastName }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label for="fatherName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نام پدر</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control form-control-sm" name="fatherName" value="">
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >کد ملی</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control form-control-sm" name="nationalCode" value="{{ $data->NationalNumber }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >شماره شناسنامه </label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control form-control-sm" name="identificationNumber" value="{{ $data->IdentificationNumber }}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <div class="col-md-3 pr-0"><span class=" text-md-right text-sm-left float-left pt-2" >تاریخ تولد</span></div>
-                    <div class="input-group input-group-sm col-md-8">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-calendar-alt cursor-pointer" id='icoBirthDate'></span></span>
-                        </div>
-                        <input type="text"  id="birthDate" name="birthDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="{{ $data->BirthDate }}" style="direction: ltr !important" placeholder="" >
-                    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <div class="row" >
+                <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left pr-1" >عنوان</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="{{ $data->Title }}" >
                 </div>
             </div>
         </div>
 
+    </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >جنسیت</label>
-                    <div class="col-md-8">
-                        <select class="custom-select custom-select-sm" name="genderType" >
-                            <option selected>انتخاب کنید</option>
-                            <option value="1">مرد</option>
-                            <option value="2">زن</option>
-                        </select>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-1"><span class=" text-md-left text-sm-right float-md-left" >تاریخ شروع</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoStartDate"></span></span>
                     </div>
+                    <input type="text" id="txtStartDate" name="startDate" value="{{ $data->StartDate }}"  class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >وضعیت تاهل</label>
-                    <div class="col-md-8">
-                        <select class="custom-select custom-select-sm" name="maritalStatus" >
-                            <option selected>انتخاب کنید</option>
-                            <option value="1">مجرد</option>
-                            <option value="2">متاهل</option>
-                        </select>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-1"><span class=" text-md-left text-sm-right float-md-left" >تاریخ پایان</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoEndDate"></span></span>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" > تحصیلات</label>
-                    <div class="col-md-8">
-                        <select class="custom-select custom-select-sm">
-                            <option selected>انتخاب کنید</option>
-                            <option value="1">لیسانس</option>
-                            <option value="2">فوق لیسانس</option>
-                            <option value="2">دکترا</option>
-                        </select>
-                    </div>
+                    <input type="text" id="txtEndDate" name="endDate" value="{{ $data->EndDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <div class="col-md-3 pr-0"><span class=" text-md-right text-sm-left float-left pt-2" >تلفن</span></div>
-                    <div class="input-group input-group-sm col-md-8">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-phone" ></span></span>
-                        </div>
-                        <input type="text" class="form-control" name="phone"  value="{{ $data->Phone }}" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        <div class="form-group col-md-4"></div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-1"><span class=" text-md-left text-sm-right float-md-left">تاریخ شروع رزرو</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoReserveStartDate" ></span></span>
                     </div>
-
+                    <input type="text" id="txtReserveStartDate" name="reserveStartDate" value="{{ $data->ReserveStartDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <div class="col-md-4 pr-0"><span class=" text-md-right text-sm-left float-left pt-2" >موبایل</span></div>
-                    <div class="input-group input-group-sm col-md-8">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-mobile-alt" ></span></span>
-                        </div>
-                        <input type="text" class="form-control" name="mobile" aria-label="Small" aria-describedby="inputGroup-sizing-sm"  value="{{ $data->Mobile }}" style="direction: ltr !important" placeholder="09*********">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
             </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >کد پرسنلی</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control form-control-sm" name="personnelNumber" value="{{ $data->PersonnelNumber }}">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-1"><span class=" text-md-left text-sm-right float-md-left" >تاریخ پایان رزرو</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoReserveEndDate" ></span></span>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نوع استخدام</label>
-                    <div class="col-md-8">
-                        <select class="custom-select custom-select-sm" name="employmentType">
-                            <option selected>انتخاب کنید</option>
-                            <option value="1">رسمی</option>
-                            <option value="2">پیمانی</option>
-                            <option value="2">قراردادی</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group col-md-4">
-                <div class="row" >
-                    <div class="col-md-3 pr-0"><span class=" text-md-right text-sm-left float-left pt-2" >تاریخ استخدام</span></div>
-                    <div class="input-group input-group-sm col-md-8">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-calendar-alt cursor-pointer" id='icoEstekhdamDate'></span></span>
-                        </div>
-                        <input type="text" name='cooperationStartDate' id="cooperationStartDate" class="form-control" value="{{ $data->CooperationStartDate }}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
-                    </div>
+                    <input type="text" id="txtReserveEndDate" name="reserveEndDate" value="{{ $data->ReserveEndDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
 
+        <div class="form-group col-md-4"></div>
+    </div>
 
-        <!--
-                <div class="form-group row">
-                        <label for="email" class="col-md-3 col-form-label text-md-right text-sm-left" >شماره تماس</label>
-                        <div class="input-group col-md-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">@</span>
-                            </div>
-                                <input type="text" class="form-control" id="tel" value="" aria-label="Username" aria-describedby="basic-addon1" >
-                        </div>
-                </div>
-
-                    <div class="form-group">
-                    <label class="col-md-4 control-label">Country</label>
-                    <div class="col-md-8 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-list"></i></span>
-                            <select class="selectpicker form-control">
-                                <option>A really long option to push the menu over the edget</option>
-                            </select>
-                        </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-1"><span class=" text-md-left text-sm-right float-md-left" >تاریخ قرعه کشی</span></div>
+                <div class="input-group input-group-sm col-md-8 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoLotteryDate"></span></span>
                     </div>
-                    </div>-->
-
+                    <input type="text" id="txtLotteryDate" name="lotteryDate" value="{{ $data->LotteryDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 <div class="form_buttons_bar row my-2 py-2" >&nbsp;
     <div class=" col">
-        <a href="{{ route('personnel.index') }}" ><button type="button" class="btn btn-primary float-left mx-1 px-4">لیست</button></a>
+        <a href="{{ route('period.index') }}" ><button type="button" class="btn btn-primary float-left mx-1 px-4">لیست</button></a>
         <button type="submit" class="btn btn-primary float-left mx-1 px-4">ذخیره</button>
     </div>
 </div>
@@ -266,13 +138,31 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#icoBirthDate").MdPersianDateTimePicker({
-            targetTextSelector: "#birthDate",
+        $("#icoStartDate").MdPersianDateTimePicker({
+            targetTextSelector: "#txtStartDate",
             textFormat: "yyyy/MM/dd",
             isGregorian: false
         });
-        $("#icoEstekhdamDate").MdPersianDateTimePicker({
-            targetTextSelector: "#cooperationStartDate",
+        $("#icoEndDate").MdPersianDateTimePicker({
+            targetTextSelector: "#txtEndDate",
+            textFormat: "yyyy/MM/dd",
+            isGregorian: false
+        });
+        $("#icoReserveStartDate").MdPersianDateTimePicker({
+            targetTextSelector: "#txtReserveStartDate",
+            textFormat: "yyyy/MM/dd",
+            isGregorian: false
+        });
+        $("#icoReserveEndDate").MdPersianDateTimePicker({
+            targetTextSelector: "#txtReserveEndDate",
+            textFormat: "yyyy/MM/dd",
+            isGregorian: false
+        });
+
+        $("#icoLotteryDate").MdPersianDateTimePicker({
+            //targetDateSelector: "#showDate_class",
+            targetTextSelector: "#txtLotteryDate",
+            //textFormat: " dddd dd MMMM yyyy ",
             textFormat: "yyyy/MM/dd",
             isGregorian: false
         });

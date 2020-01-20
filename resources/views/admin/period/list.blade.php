@@ -50,56 +50,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>دوره سوم</td>
-                    <td>1398/01/01</td>
-                    <td>1398/12/29</td>
+                @php
+                    $index = 1 ;
+                @endphp
+                @foreach($data as $row)
+
+                    <tr>
+                    <th scope="row">{{ $index++ }}</th>
+                    <td>{{ $row->Title }}</td>
+                    <td>{{ $row->StartDate }}</td>
+                    <td>{{ $row->EndDate }}</td>
                     <td>
-                        <a href="{{ route('period.create') }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
+                        <form action="{{ route('period.destroy', $row->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <a href="{{ route('period.edit', $row->id) }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
+                            <button type="submit" class="btn btn-danger btn-sm"><span id="collapse-icon" class="fa fa-trash" ></span></button>
+                        </form>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>دوره دوم</td>
-                    <td>1397/01/01</td>
-                    <td>1397/12/29</td>
-                    <td>
-                        <a href="{{ route('period.create') }}" style="color: #333333"><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>دوره اول</td>
-                    <td>1396/01/01</td>
-                    <td>1396/12/29</td>
-                    <td>
-                        <a href="{{ route('period.create') }}" style="color: #333333"><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
-                </li>
-                <!--li class="page-item"><a class="page-link" href="#">1</a></li-->
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                </li>
-                <!--li class="page-item"><a class="page-link" href="#">3</a></li-->
-                <li class="page-item">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">بعدی</a>
-                </li>
-            </ul>
-        </nav>
-
+        {!! $data->links() !!}
     </div>
-
 
 @endsection
