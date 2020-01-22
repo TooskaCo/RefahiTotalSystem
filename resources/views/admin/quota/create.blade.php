@@ -29,7 +29,7 @@
         <button type="button" class="btn btn-primary">ذخیره</button>
         <button type="button" class="btn btn-primary">لیست</button>
 </div-->
-<form class="well form-horizontal" method="post" action="" enctype="multipart/form-data">
+<form class="well form-horizontal" method="post" action="{{ route('quota.store') }}" enctype="multipart/form-data">
     @csrf
 <div class="form_container">
 
@@ -38,15 +38,15 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left" >دوره مکان</label>
                 <div class="col-md-10">
-                    <select class="custom-select custom-select-sm">
-                        <option selected>انتخاب کنید</option>
+                    <select name="" class="custom-select custom-select-sm">
+                        <option selected value="0">انتخاب کنید</option>
                     </select>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="form-row">
+    <!--div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
                 <div class="col-md-4 pr-0"><span class=" text-md-left text-sm-right float-md-left pt-2" >تاریخ شروع</span></div>
@@ -71,11 +71,11 @@
         </div>
 
         <div class="form-group col-md-4"></div>
-    </div>
+    </div-->
 
 
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <!--div class="form-group col-md-4">
             <div class="row" >
                 <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >درجه</label>
                 <div class="col-md-8">
@@ -87,14 +87,16 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div-->
 
         <div class="form-group col-md-4">
             <div class="row" >
                 <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نوع سهمیه</label>
                 <div class="col-md-8">
-                    <select class="custom-select custom-select-sm">
-                        <option selected>انتخاب کنید</option>
+                    <select name="quotaType" class="custom-select custom-select-sm">
+                        <option selected value="0">انتخاب کنید</option>
+                        <option value="1">عادی</option>
+                        <option value="2">آزاد</option>
                     </select>
                 </div>
             </div>
@@ -104,18 +106,18 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
-                <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت اعلامی</label>
+                <label for="declaredCapacity" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت اعلامی</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" name="declaredCapacity" value="">
                 </div>
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <div class="row" >
-                <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت در اختیار</label>
+                <label for="disposalCapacity" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت در اختیار</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" name="disposalCapacity" value="">
                 </div>
             </div>
         </div>
@@ -123,9 +125,17 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
-                <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >هزینه نفر شب</label>
+                <label for="price" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >هزینه نفر شب</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" name="price" value="">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="quotaDuration" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >بازه زمانی سهمیه</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="quotaDuration" value="">
                 </div>
             </div>
         </div>
@@ -134,24 +144,24 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
-                <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت مازاد</label>
+                <label for="extraCapacity" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت مازاد</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" name="extraCapacity" value="">
                 </div>
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <div class="row" >
-                <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تعداد نفرات مازاد</label>
+                <label for="extraPeopleCount" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تعداد نفرات مازاد</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" name="extraPeopleCount" value="">
                 </div>
             </div>
         </div>
     </div>
 
-    <hr/>
+    <!--hr/>
     <div class="form-row">
         <div class="form-group col-md-8">
             <div class="row" >
@@ -171,11 +181,11 @@
                         <label class="custom-control-label" for="customSwitch1">نتیجه قرعه کشی مورد تایید است</label>
                     </div>
                 </div>
-            </div-->
+            </div--><!--
         </div>
-    </div>
+    </div>-->
 
-    <div class="form-row">
+    <!--div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
                 <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تایید کننده</label>
@@ -196,7 +206,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
 
 
 </div>

@@ -43,62 +43,36 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">ردیف</th>
-                    <th scope="col">دوره / مکان</th>
-                    <th scope="col">درجه</th>
-                    <th scope="col">وضعیت تایید</th>
+                    <th scope="col">ظرفیت</th>
+                    <th scope="col">بازه زمانی</th>
+                    <th scope="col">هزینه</th>
                     <th scope="col">عملیات</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>دوره اول</td>
-                    <td>طلایی</td>
-                    <td>تایید نشده</td>
-                    <td>
-                        <a href="{{ route('quota.create') }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>دوره دوم</td>
-                    <td>نقره ای</td>
-                    <td>تایید شده</td>
-                    <td>
-                        <a href="{{ route('quota.create') }}" style="color: #333333"><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>دوره سوم</td>
-                    <td>برنزی</td>
-                    <td>تایید نشده</td>
-                    <td>
-                        <a href="{{ route('quota.create') }}" style="color: #333333"><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                        <span id="collapse-icon" class="fa fa-trash" ></span>
-                    </td>
-                </tr>
+                @php
+                    $index = 1 ;
+                @endphp
+                @foreach($data as $row)
+                    <tr>
+                        <th scope="row">{{ $index++ }}</th>
+                        <td>{{ $row->DeclaredCapacity }}</td>
+                        <td>{{ $row->QuotaDuration }}</td>
+                        <td>{{ $row->Price }}</td>
+                        <td>
+                            <form action="{{ route('quota.destroy', $row->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <a href="{{ route('quota.edit', $row->id) }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
+                                <button type="submit" class="btn btn-danger btn-sm"><span id="collapse-icon" class="fa fa-trash" ></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
-                </li>
-                <!--li class="page-item"><a class="page-link" href="#">1</a></li-->
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                </li>
-                <!--li class="page-item"><a class="page-link" href="#">3</a></li-->
-                <li class="page-item">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">بعدی</a>
-                </li>
-            </ul>
-        </nav>
-
+        {!! $data->links() !!}
     </div>
 
 
