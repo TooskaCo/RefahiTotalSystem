@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Period;
+use App\PeriodPlace;
 use Illuminate\Http\Request;
+use DB;
 
 class PeriodController extends Controller
 {
@@ -79,6 +82,14 @@ class PeriodController extends Controller
     public function edit($id)
     {
         $data = Period::findOrFail($id);
+        $data->placeData = DB::table('Place')->orderby('Title')->get();
+        $periodPlaceData = DB::table('PeriodPlace')
+            ->join('Place', 'Place.id', '=', 'PeriodPlace.Place_ID')
+            ->select('PeriodPlace.*', 'Place.Title AS PlaceTitle')
+            ->where('period_ID', $id)
+            ->get();
+        $data->periodPlaceData = $periodPlaceData;
+        //dd($data);
         return view('admin.period.edit', compact('data'));
     }
 
@@ -108,6 +119,22 @@ class PeriodController extends Controller
         );
 
         Period::whereId($id)->update($form_data);
+
+        if(isset($request->place) && ($request->place > 0 ))
+        {
+            $form_data = array(
+                'Period_ID'       =>   $id,
+                'Place_ID'        =>   $request->place,
+                'DeclaredCapacity' => $request->declaredCapacity,
+                'DisposalCapacity' => $request->disposalCapacity,
+                'QuotaType'=> $request->quotaType,
+                'Price'=> $request->price,
+                'QuotaDuration'=> $request->quotaDuration,
+                'ExtraCapacity'=> $request->extraCapacity,
+                'ExtraPeopleCount'=> $request->extraPeopleCount,
+            );
+            PeriodPlace::create($form_data);
+        }
         //return redirect('admin/personnel')->with('success', 'اطلاعات با موفقیت ویرایش شد');
         return redirect()->route('period.edit', $id)->with('success', 'اطلاعات با موفقیت ویرایش شد');
     }

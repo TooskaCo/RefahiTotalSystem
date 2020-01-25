@@ -15,17 +15,19 @@ class CreateQuotaTable extends Migration
     {
         Schema::create('Quota', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->integer('Period_ID')->nullable();
-            $table->integer('Place_ID')->nullable();
+            $table->integer('Period_Place_ID')->nullable();
+            $table->string('FromDate')->nullable();
+            $table->string('ToDate')->nullable();
+            $table->smallInteger('Grade')->nullable();
+            $table->smallInteger('QuotaType')->nullable();
             $table->integer('DeclaredCapacity')->nullable();
             $table->integer('DisposalCapacity')->nullable();
-            $table->smallInteger('QuotaType')->nullable();
             $table->integer('Price')->nullable();
-            $table->integer('QuotaDuration')->nullable();
             $table->integer('ExtraCapacity')->nullable();
             $table->integer('ExtraPeopleCount')->nullable();
-
+            $table->boolean('IsLotteryResultConfrm')->nullable();
+            $table->string('ConfirmBy')->nullable();
+            $table->string('ConfirmTime')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +39,6 @@ class CreateQuotaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Quota');
+        Schema::dropIfExists('quota');
     }
 }
