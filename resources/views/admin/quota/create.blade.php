@@ -38,15 +38,18 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left" >دوره مکان</label>
                 <div class="col-md-10">
-                    <select name="" class="custom-select custom-select-sm">
+                    <select name="period_Place_ID" class="custom-select custom-select-sm">
                         <option selected value="0">انتخاب کنید</option>
+                        @foreach($periodPlaceData as $row)
+                            <option value="{{$row->id}}">{{$row->PeriodPlaceTitle}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
         </div>
-
     </div>
-    <!--div class="form-row">
+
+    <div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
                 <div class="col-md-4 pr-0"><span class=" text-md-left text-sm-right float-md-left pt-2" >تاریخ شروع</span></div>
@@ -54,7 +57,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoFromDate"></span></span>
                     </div>
-                    <input type="text" id="txtFromDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtFromDate" name="fromDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
@@ -65,29 +68,29 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoToDate"></span></span>
                     </div>
-                    <input type="text" id="txtToDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtToDate" name="toDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
 
         <div class="form-group col-md-4"></div>
-    </div-->
+    </div>
 
 
     <div class="form-row">
-        <!--div class="form-group col-md-4">
+        <div class="form-group col-md-4">
             <div class="row" >
                 <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >درجه</label>
                 <div class="col-md-8">
-                    <select class="custom-select custom-select-sm">
-                        <option selected>انتخاب کنید</option>
+                    <select name="grade" class="custom-select custom-select-sm">
+                        <option selected value="0">انتخاب کنید</option>
                         <option value="1">طلایی</option>
                         <option value="2">نقره ای</option>
-                        <option value="2">برنزی</option>
+                        <option value="3">برنزی</option>
                     </select>
                 </div>
             </div>
-        </div-->
+        </div>
 
         <div class="form-group col-md-4">
             <div class="row" >
@@ -131,14 +134,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-group col-md-4">
-            <div class="row" >
-                <label for="quotaDuration" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >بازه زمانی سهمیه</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" name="quotaDuration" value="">
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="form-row">
@@ -161,14 +156,14 @@
         </div>
     </div>
 
-    <!--hr/>
+    <hr/>
     <div class="form-row">
         <div class="form-group col-md-8">
             <div class="row" >
                 <div class="col-md-2">&nbsp</div>
                 <div class="col-md-10">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                        <input type="checkbox" name="isLotteryResultConfrm" class="custom-control-input" id="customCheck1" checked="">
                         <label class="custom-control-label" for="customCheck1">نتیجه قرعه کشی مورد تایید است</label>
                     </div>
                 </div>
@@ -181,16 +176,16 @@
                         <label class="custom-control-label" for="customSwitch1">نتیجه قرعه کشی مورد تایید است</label>
                     </div>
                 </div>
-            </div--><!--
+            </div-->
         </div>
-    </div>-->
+    </div>
 
-    <!--div class="form-row">
+    <div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >
                 <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تایید کننده</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="firstName" value="">
+                    <input type="text" class="form-control form-control-sm" name="confirmBy" value="">
                 </div>
             </div>
         </div>
@@ -202,11 +197,11 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoConfirmDate"></span></span>
                     </div>
-                    <input type="text" id="txtConfirmDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                    <input type="text" id="txtConfirmDate" name="confirmTime" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
                 </div>
             </div>
         </div>
-    </div-->
+    </div>
 
 
 </div>

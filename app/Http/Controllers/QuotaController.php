@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB ;
 use App\Quota;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,20 @@ class QuotaController extends Controller
      */
     public function index()
     {
-        $data = Quota::latest()->paginate(5);
+        //$data = Quota::latest()
+        $data = DB::table('Quota')
+            ->leftJoin('PeriodPlace', 'PeriodPlace.id', '=', 'Quota.Period_Place_ID')
+            ->leftJoin('Period', 'Period.id', '=', 'PeriodPlace.Period_ID')
+            ->leftJoin('Place', 'Place.id', '=', 'PeriodPlace.Place_ID')
+            ->select('Quota.*',DB::raw("CONCAT(Period.Title,' ',Place.Title) AS PeriodPlaceTitle" ))
+            ->orderBy('Quota.created_at','DESC')
+            ->paginate(5);
+
+        /*$data->periodPlaceData = DB::table('PeriodPlace')
+            ->select('PeriodPlace.*', DB::raw("CONCAT(Period.Title,' ',Place.Title) AS PeriodPlaceTitle" ))
+            ->get();*/
+
+
         return view('admin.quota.list',compact('data'))
             ->with('i', (request()->input('page',1)-1)*5);
     }
@@ -26,7 +40,12 @@ class QuotaController extends Controller
      */
     public function create()
     {
-        return view('admin.quota.create');
+        $periodPlaceData = DB::table('PeriodPlace')
+            ->join('Period', 'Period.id', '=', 'PeriodPlace.Period_ID')
+            ->join('Place', 'Place.id', '=', 'PeriodPlace.Place_ID')
+            ->select('PeriodPlace.*', DB::raw("CONCAT(Period.Title,' ',Place.Title) AS PeriodPlaceTitle" ))
+            ->get();
+        return view('admin.quota.create', compact('periodPlaceData'));
     }
 
     /**
@@ -45,16 +64,19 @@ class QuotaController extends Controller
 
         $form_data = array(
             //'id'=>1,
-            //'Title'       =>   $request->title,
-            'Period_ID'        =>   $request->period_ID,
-            'Place_ID' => $request->place_ID,
+            'Period_Place_ID' =>   $request->period_Place_ID,
+            'FromDate' => $request->fromDate,
+            'ToDate' => $request->toDate,
+            'Grade'=> $request->grade,
+            'QuotaType'=> $request->quotaType,
             'DeclaredCapacity' => $request->declaredCapacity,
             'DisposalCapacity' => $request->disposalCapacity,
-            'QuotaType'=> $request->quotaType,
             'Price'=> $request->price,
-            'QuotaDuration'=> $request->quotaDuration,
             'ExtraCapacity'=> $request->extraCapacity,
             'ExtraPeopleCount'=> $request->extraPeopleCount,
+            'IsLotteryResultConfrm'=>($request->isLotteryResultConfrm ? 1 : 0 ),
+            'ConfirmBy'=> $request->confirmBy,
+            'ConfirmTime'=> $request->confirmTime,
         );
 
         Quota::create($form_data);
@@ -82,6 +104,11 @@ class QuotaController extends Controller
     public function edit($id)
     {
         $data = Quota::findOrFail($id);
+        $data->periodPlaceData = DB::table('PeriodPlace')
+            ->join('Period', 'Period.id', '=', 'PeriodPlace.Period_ID')
+            ->join('Place', 'Place.id', '=', 'PeriodPlace.Place_ID')
+            ->select('PeriodPlace.*', DB::raw("CONCAT(Period.Title,' ',Place.Title) AS PeriodPlaceTitle" ))
+            ->get();
         return view('admin.quota.edit', compact('data'));
     }
 
@@ -102,15 +129,19 @@ class QuotaController extends Controller
         }*/
 
         $form_data = array(
-            'Period_ID'        =>   $request->period_ID,
-            'Place_ID' => $request->place_ID,
+            'Period_Place_ID' =>   $request->period_Place_ID,
+            'FromDate' => $request->fromDate,
+            'ToDate' => $request->toDate,
+            'Grade'=> $request->grade,
+            'QuotaType'=> $request->quotaType,
             'DeclaredCapacity' => $request->declaredCapacity,
             'DisposalCapacity' => $request->disposalCapacity,
-            'QuotaType'=> $request->quotaType,
             'Price'=> $request->price,
-            'QuotaDuration'=> $request->quotaDuration,
             'ExtraCapacity'=> $request->extraCapacity,
             'ExtraPeopleCount'=> $request->extraPeopleCount,
+            'IsLotteryResultConfrm'=>($request->isLotteryResultConfrm ? 1 : 0 ),
+            'ConfirmBy'=> $request->confirmBy,
+            'ConfirmTime'=> $request->confirmTime,
         );
 
         Quota::whereId($id)->update($form_data);

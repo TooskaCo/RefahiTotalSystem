@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Quota extends Model
 {
     protected $table = 'Quota';
-    protected  $fillable=['Period_ID','Place_ID','DeclaredCapacity','DisposalCapacity','QuotaType','Price','QuotaDuration','ExtraCapacity','ExtraPeopleCount'];
+    protected  $fillable=['Period_Place_ID','FromDate','ToDate','Grade','QuotaType','DeclaredCapacity','DisposalCapacity','Price','ExtraCapacity','ExtraPeopleCount','IsLotteryResultConfrm','ConfirmBy','ConfirmTime'];
 }

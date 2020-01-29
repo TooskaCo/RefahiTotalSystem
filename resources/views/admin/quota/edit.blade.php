@@ -44,16 +44,59 @@
             <div class="row" >
                 <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left" >دوره مکان</label>
                 <div class="col-md-10">
-                    <select name="" class="custom-select custom-select-sm">
+                    <select name="period_Place_ID"  class="custom-select custom-select-sm">
                         <option selected value="0">انتخاب کنید</option>
+                        @foreach($data->periodPlaceData as $row)
+                            <option value="{{$row->id}}" {{ ($data->Period_Place_ID == $row->id) ? "selected" : "" }}>{{$row->PeriodPlaceTitle}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-0"><span class=" text-md-left text-sm-right float-md-left pt-2" >تاریخ شروع</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoFromDate"></span></span>
+                    </div>
+                    <input type="text" id="txtFromDate" name="fromDate" value="{{ $data->FromDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-0"><span class=" text-md-left text-sm-right float-md-left pt-2" > تاریخ پایان</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoToDate"></span></span>
+                    </div>
+                    <input type="text" id="txtToDate" name="toDate" value="{{ $data->ToDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4"></div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >درجه</label>
+                <div class="col-md-8">
+                    <select name="grade" class="custom-select custom-select-sm">
+                        <option selected value="0">انتخاب کنید</option>
+                        <option value="1" {{ ($data->Grade == 1) ? "selected" : "" }}>طلایی</option>
+                        <option value="2" {{ ($data->Grade == 2) ? "selected" : "" }}>نقره ای</option>
+                        <option value="3" {{ ($data->Grade == 3) ? "selected" : "" }}>برنزی</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="form-group col-md-4">
             <div class="row" >
                 <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نوع سهمیه</label>
@@ -96,14 +139,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-group col-md-4">
-            <div class="row" >
-                <label for="quotaDuration" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >بازه زمانی سهمیه</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" name="quotaDuration" value="{{ $data->QuotaDuration }}">
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="form-row">
@@ -126,6 +161,54 @@
         </div>
     </div>
 
+    <hr/>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <div class="row" >
+                <div class="col-md-2">&nbsp</div>
+                <div class="col-md-10">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="isLotteryResultConfrm" class="custom-control-input" id="customCheck1" @if($data->IsLotteryResultConfrm == true) checked @endif >
+                        <label class="custom-control-label" for="customCheck1">نتیجه قرعه کشی مورد تایید است</label>
+                    </div>
+                </div>
+            </div>
+            <!--div class="row" >
+                <div class="col-md-2">&nbsp</div>
+                <div class="col-md-10">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">نتیجه قرعه کشی مورد تایید است</label>
+                    </div>
+                </div>
+            </div-->
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="firstName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تایید کننده</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="confirmBy" value="{{ $data->ConfirmBy }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <div class="col-md-4 pr-0"><span class=" text-md-left text-sm-right float-md-left pt-2" >تاریخ تایید</span></div>
+                <div class="input-group input-group-sm col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa  fa-calendar-alt cursor-pointer" id="icoConfirmDate"></span></span>
+                    </div>
+                    <input type="text" id="txtConfirmDate" name="confirmTime" value="{{ $data->ConfirmTime }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <div class="form_buttons_bar row my-2 py-2" >&nbsp;
@@ -135,6 +218,34 @@
     </div>
 </div>
 </form>
+
+@endsection
+@section('script')
+    @parent
+
+    <script src="{{ asset('components/PersianCalender/src/jquery.md.bootstrap.datetimepicker.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#icoFromDate").MdPersianDateTimePicker({
+                targetTextSelector: "#txtFromDate",
+                textFormat: "yyyy/MM/dd",
+                isGregorian: false
+            });
+            $("#icoToDate").MdPersianDateTimePicker({
+                targetTextSelector: "#txtToDate",
+                textFormat: "yyyy/MM/dd",
+                isGregorian: false
+            });
+            $("#icoConfirmDate").MdPersianDateTimePicker({
+                targetTextSelector: "#txtConfirmDate",
+                enableTimePicker: true,
+                textFormat: "yyyy/MM/dd - HH:mm:ss",
+                isGregorian: false
+            });
+        });
+    </script>
+
 
 @endsection
 

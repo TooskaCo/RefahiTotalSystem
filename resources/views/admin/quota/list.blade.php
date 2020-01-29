@@ -43,9 +43,9 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">ردیف</th>
-                    <th scope="col">ظرفیت</th>
-                    <th scope="col">بازه زمانی</th>
-                    <th scope="col">هزینه</th>
+                    <th scope="col">دوره مکان</th>
+                    <th scope="col">تاریخ شروع</th>
+                    <th scope="col">تاریخ پایان</th>
                     <th scope="col">عملیات</th>
                 </tr>
                 </thead>
@@ -56,9 +56,9 @@
                 @foreach($data as $row)
                     <tr>
                         <th scope="row">{{ $index++ }}</th>
-                        <td>{{ $row->DeclaredCapacity }}</td>
-                        <td>{{ $row->QuotaDuration }}</td>
-                        <td>{{ $row->Price }}</td>
+                        <td>{{ $row->PeriodPlaceTitle }}</td>
+                        <td>{{ $row->FromDate }}</td>
+                        <td>{{ $row->ToDate }}</td>
                         <td>
                             <form action="{{ route('quota.destroy', $row->id) }}" method="post">
                                 @csrf

@@ -35,7 +35,7 @@
         <button type="button" class="btn btn-primary">ذخیره</button>
         <button type="button" class="btn btn-primary">لیست</button>
 </div-->
-<form class="well form-horizontal" method="post" action="{{ route('period.update', $data->id) }}" enctype="multipart/form-data">
+<form class="well form-horizontal needs-validation" method="post" action="{{ route('period.update', $data->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
 <div class="form_container">
@@ -119,6 +119,154 @@
         </div>
     </div>
 
+    <p class="mt-4 font-weight-bold text-info">اطلاعات مکان ها</p>
+    <hr class="primary" />
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <div class="row" >
+                <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left" >مکان</label>
+                <div class="col-md-10">
+                    <select name="place" class="custom-select custom-select-sm">
+
+                        <option selected value="0">انتخاب کنید</option>
+                        @foreach($data->placeData as $row)
+                            <option value="{{$row->id}}">{{$row->Title}}</option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback">
+                        هیچ مکانی انتخاب نشده است
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="lastName" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >نوع سهمیه</label>
+                <div class="col-md-8">
+                    <select name="quotaType" class="custom-select custom-select-sm">
+                        <option selected value="0">انتخاب کنید</option>
+                        <option value="1">عادی</option>
+                        <option value="2">آزاد</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="declaredCapacity" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت اعلامی</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="declaredCapacity" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="disposalCapacity" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت در اختیار</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="disposalCapacity" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="price" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >هزینه نفر شب</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="price" value="">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="quotaDuration" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >بازه زمانی سهمیه</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="quotaDuration" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="extraCapacity" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >ظرفیت مازاد</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="extraCapacity" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="row" >
+                <label for="extraPeopleCount" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تعداد نفرات مازاد</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-sm" name="extraPeopleCount" value="">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="row" >
+                <button type="submit" onclick="checkValidation(event)" class="btn btn-success btn-sm btn-block mx-3">ثبت</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <table class="table table-sm table-striped table-hover mt-3 text-center">
+            <thead class="text-center">
+            <tr class="table-primary text-center">
+                <th scope="col" class="text-center">ردیف</th>
+                <th scope="col" class="text-center" >مکان</th>
+                <th scope="col" class="text-center">ظرفیت اعلامی</th>
+                <th scope="col" class="text-center">ظرفیت در اختیار</th>
+                <th scope="col" class="text-center">نوع سهمیه</th>
+                <th scope="col" class="text-center">هزینه نفر شب</th>
+                <th scope="col" class="text-center">بازه زمانی</th>
+                <th scope="col" class="text-center">ظرفیت مازاد</th>
+                <th scope="col" class="text-center">تعداد مازاد</th>
+            </tr>
+            </thead>
+            <tbody>
+            @php
+                $index = 1 ;
+            @endphp
+
+            @forelse($data->periodPlaceData as $row)
+                <tr >
+                    <td scope="row" class="text-center">{{ $index++ }}</td>
+                    <td>{{ $row->PlaceTitle }}</td>
+                    <td>{{ $row->DeclaredCapacity }}</td>
+                    <td>{{ $row->DisposalCapacity }}</td>
+                    <td>
+                        @if($row->QuotaType == 1)
+                           عادی
+                        @elseif($row->QuotaType == 2)
+                             آزاد
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>{{ $row->Price }}</td>
+                    <td>{{ $row->QuotaDuration }}</td>
+                    <td>{{ $row->ExtraCapacity }}</td>
+                    <td>{{ $row->ExtraPeopleCount }}</td>
+                </tr>
+                @empty
+                    <tr>
+                        <td colspan="9">اطلاعات مکان ثبت نشده است</td>
+                    </tr>
+            @endforelse
+
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <div class="form_buttons_bar row my-2 py-2" >&nbsp;
@@ -167,6 +315,43 @@
             isGregorian: false
         });
     });
+
+
+    /*function checkValidation(event)
+    {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            //form.addEventListener('submit', function(event)
+            {
+        if (event.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else
+                form.classList.add('was-validated');
+            };//, false);
+        });
+    }*/
+/*
+    (function() {
+
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    //form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();*/
+
 </script>
 
 @endsection
