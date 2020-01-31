@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-<!-- @section('title' , 'اضافه کردن پرسنل جدید') -->
+@section('title' ,'دوره ها')
 
 @section('content')
 
@@ -230,6 +230,7 @@
                 <th scope="col" class="text-center">بازه زمانی</th>
                 <th scope="col" class="text-center">ظرفیت مازاد</th>
                 <th scope="col" class="text-center">تعداد مازاد</th>
+                <th scope="col" class="text-center">عملیات</th>
             </tr>
             </thead>
             <tbody>
@@ -256,6 +257,11 @@
                     <td>{{ $row->QuotaDuration }}</td>
                     <td>{{ $row->ExtraCapacity }}</td>
                     <td>{{ $row->ExtraPeopleCount }}</td>
+                    <td>
+                        <button type="button" class="btn btn-success edit-modal22" data-toggle="modal22" data-target="#myModal222"  data-id="{{$row->id}}" data-name="{{$row->Price}}" data-whatever="{{$row->id}}"><span id="collapse-icon" class="fa fa-edit" ></span></button>
+                        <button type="button" class="btn btn-success "  data-id="{{$row->id}}" onclick="executeSP({{$row->id}})">سهمیه</button></td>
+
+
                 </tr>
                 @empty
                     <tr>
@@ -277,12 +283,52 @@
 </div>
 </form>
 
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ویرایش اطلاعات</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frmUpdatePeriodPlace" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="id">ID:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="fid" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="mdlPrice">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updatePeriodPlaceData()">ذخیره</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 @section('script')
     @parent
 
 
 <script src="{{ asset('components/PersianCalender/src/jquery.md.bootstrap.datetimepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/period_place_script.js') }}" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -314,7 +360,33 @@
             textFormat: "yyyy/MM/dd",
             isGregorian: false
         });
+
+
     });
+
+    function updatePeriodPlaceData()
+    {
+        var id = $('#fid').val();
+        var url = '{{ route("periodPlace.update", ":id") }}';
+        alert(url);
+        url = url.replace(':id', id);
+        $("#frmUpdatePeriodPlace").attr('action', url);
+        $("#frmUpdatePeriodPlace").submit();
+    }
+
+    function executeSP(id)
+    {
+
+        $.ajax({
+            type: 'post',
+            url: '/admin/sp1/'+ id,
+
+            success: function() {
+                alert('با موفقیت انجام شد');
+            }
+        });
+    }
+
 
 
     /*function checkValidation(event)

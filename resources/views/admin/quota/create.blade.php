@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-<!-- @section('title' , 'اضافه کردن پرسنل جدید') -->
+@section('title' ,'سهمیه بندی');
 
 @section('content')
     

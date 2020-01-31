@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-<!-- @section('title' , 'اضافه کردن پرسنل جدید') -->
+@section('title' ,'سهمیه بندی')
 
 @section('content')
     @if ($message = Session::get('success'))
@@ -37,6 +37,23 @@
 
         </div>
 
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--div class="modal-header">
+                        حذف رکورد اطلاعاتی
+                    </div-->
+                    <div class="modal-body">
+                        آیا برای انجام عملیات حذف مطمئن هستید ؟
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">انصراف</button>
+                        <a class="btn btn-danger btn-ok" >حذف</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row" >
             <table class="table table-striped table-hover">
                 <!--caption>اسامی به ترتیب حروف الفبا مرتب شده است</caption-->
@@ -60,11 +77,11 @@
                         <td>{{ $row->FromDate }}</td>
                         <td>{{ $row->ToDate }}</td>
                         <td>
-                            <form action="{{ route('quota.destroy', $row->id) }}" method="post">
+                            <form id="frm_{{$row->id}}"  action="{{ route('quota.destroy', $row->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{ route('quota.edit', $row->id) }}" style="color: #333333" ><span id="collapse-icon" class="fa fa-edit mr-3" ></span></a>
-                                <button type="submit" class="btn btn-danger btn-sm"><span id="collapse-icon" class="fa fa-trash" ></span></button>
+                                <a href="{{ route('quota.edit', $row->id) }}" style="color: #333333" ><button type="button" class="btn btn-success btn-sm"><span id="collapse-icon" class="fa fa-edit" ></span></button></a>
+                                <button type="button" class="btn btn-danger btn-sm" data-recordid="{{ $row->id }}" data-toggle="modal" data-target="#confirm-delete"   ><span id="collapse-icon" class="fa fa-trash" ></span></button>
                             </form>
                         </td>
                     </tr>
@@ -77,3 +94,34 @@
 
 
 @endsection
+
+@section('script')
+    @parent
+    <script>
+        // Bind click to OK button within popup
+        $('#confirm-delete').on('click', '.btn-ok', function(e)
+        {
+            var $modalDiv = $(e.delegateTarget);
+            var id = $(this).data("recordid");
+            $modalDiv.addClass('loading');
+            //var form = $(e.target).parent('form:first');
+            //alert(id);
+            $('#frm_'+ id).submit();
+            $modalDiv.modal('hide').removeClass('loading');
+            //$(e.target).parents('form:first').submit();
+            /*$.post('/admin/news/destroy/' + id).then(function()
+            {
+                alert(id);
+            });*/
+        });
+
+
+        // Bind to modal opening to set necessary data properties to be used to make request
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            var data = $(e.relatedTarget).data();
+            //$('.title', this).text(data.recordTitle);
+            $('.btn-ok', this).data('recordid', data.recordid);
+        });
+    </script>
+@endsection
+

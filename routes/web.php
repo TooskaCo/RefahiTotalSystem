@@ -31,7 +31,10 @@ Route::resource('/admin/personnel','PersonnelController');
 Route::resource('/admin/news','NewsController');
 Route::resource('/admin/place','PlaceController');
 Route::resource('/admin/period','PeriodController');
+Route::resource('/admin/periodPlace','periodPlaceController');
 Route::resource('/admin/quota','QuotaController');
+
+Route::post('/admin/sp1/{id}','spController@execSP');
 
 Route::get('/home','HomeController@index'); 
 /*Route::get('/home', function () {

@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-<!-- @section('title' , 'اضافه کردن پرسنل جدید') -->
+@section('title' ,'اماکن اقامتی')
 
 @section('content')
 
@@ -18,7 +18,7 @@
 
 <div class="form_header bg-info">
     <span id="collapse-icon" class="fa fa-university fa-2x mr-2" ></span>
-    <span class="h5">مکان اقامتی</span>
+    <span class="h5">اماکن اقامتی</span>
     <!--button type="button" class="btn bg-white float-left mx-2">ذخیره</button>
     <button type="button" class="btn btn-success float-left mx-2 ">لیست</button-->
 </div>
