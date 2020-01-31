@@ -259,7 +259,7 @@
                     <td>{{ $row->ExtraPeopleCount }}</td>
                     <td>
                         <button type="button" class="btn btn-success edit-modal22" data-toggle="modal22" data-target="#myModal222"  data-id="{{$row->id}}" data-name="{{$row->Price}}" data-whatever="{{$row->id}}"><span id="collapse-icon" class="fa fa-edit" ></span></button>
-                        <button type="button" class="btn btn-success "  data-id="{{$row->id}}" onclick="executeSP({{$row->id}})">سهمیه</button></td>
+                        <a href="{{ route('sp',$row->id) }}" ><button type="button" class="btn btn-success " >سهمیه</button></a></td>
 
 
                 </tr>
@@ -374,7 +374,7 @@
         $("#frmUpdatePeriodPlace").submit();
     }
 
-    function executeSP(id)
+    /*function executeSP(id)
     {
 
         $.ajax({
@@ -385,7 +385,7 @@
                 alert('با موفقیت انجام شد');
             }
         });
-    }
+    }*/
 
 
 
