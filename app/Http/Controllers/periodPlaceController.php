@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PeriodPlace;
 use Illuminate\Http\Request;
 
 class periodPlaceController extends Controller
@@ -68,7 +69,29 @@ class periodPlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+       /* {
+            $request->validate([
+                'title'    =>  'required',
+            ]);
+        }*/
+
+        $form_data = array(
+                'Period_ID'       =>   $id,
+                /*'Place_ID'        =>   $request->place,
+                'DeclaredCapacity' => $request->declaredCapacity,
+                'DisposalCapacity' => $request->disposalCapacity,
+                'QuotaType'=> $request->quotaType,*/
+                'Price'=> $request->price,
+                /*'QuotaDuration'=> $request->quotaDuration,
+                'ExtraCapacity'=> $request->extraCapacity,
+                'ExtraPeopleCount'=> $request->extraPeopleCount,*/
+        );
+
+        PeriodPlace::whereId($id)->update($form_data);
+
+
+        return redirect() ; //->route('period.edit', $id)->with('success', 'اطلاعات با موفقیت ویرایش شد');
     }
 
     /**

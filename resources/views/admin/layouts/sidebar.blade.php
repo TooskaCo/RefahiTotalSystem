@@ -32,23 +32,23 @@
         </a>
         <!-- Submenu content -->
         <div id='submenu1' class="collapse sidebar-submenu">
-            <a href="{{ route('personnel.index') }}" class="list-group-item list-group-item-action bg-submenu ">
-                <span class="menu-collapsed">پرسنل</span>
-            </a>
             <a href="{{ route('news.index') }}" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">اخبار</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action bg-submenu ">
-                <span class="menu-collapsed">گزارشات</span>
+            <a href="{{ route('personnel.index') }}" class="list-group-item list-group-item-action bg-submenu ">
+                <span class="menu-collapsed">پرسنل</span>
             </a>
             <a href="{{ route('place.index') }}" class="list-group-item list-group-item-action bg-submenu ">
-                <span class="menu-collapsed">مکان ها</span>
+                <span class="menu-collapsed">اماکن اقامتی</span>
             </a>
             <a href="{{ route('period.index') }}" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">دوره ها</span>
             </a>
             <a href="{{ route('quota.index') }}" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">سهمیه بندی</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action bg-submenu ">
+                <span class="menu-collapsed">گزارشات</span>
             </a>
 
         </div>
