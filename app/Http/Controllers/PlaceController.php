@@ -136,4 +136,10 @@ class PlaceController extends Controller
         $data->delete();
         return redirect('admin/place')->with('success', 'اطلاعات با موفقیت حذف شد');
     }
+
+    public function reservationPlaceIndex()
+    {
+        return view('personalpage.reservationPlace.list');
+    }
+
 }

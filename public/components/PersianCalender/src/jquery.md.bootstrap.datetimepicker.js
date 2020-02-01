@@ -561,7 +561,7 @@
         if (!inputNumber1) return '';
         var str1 = inputNumber1.toString().trim();
         if (!str1) return '';
-        str1 = str1.replace(/0/img, '۰');
+        /*str1 = str1.replace(/0/img, '۰');
         str1 = str1.replace(/1/img, '۱');
         str1 = str1.replace(/2/img, '۲');
         str1 = str1.replace(/3/img, '۳');
@@ -570,7 +570,7 @@
         str1 = str1.replace(/6/img, '۶');
         str1 = str1.replace(/7/img, '۷');
         str1 = str1.replace(/8/img, '۸');
-        str1 = str1.replace(/9/img, '۹');
+        str1 = str1.replace(/9/img, '۹');*/
         return str1;
     }
 

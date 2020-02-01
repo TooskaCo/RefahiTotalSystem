@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/admin/dashboard', function () {
     return view('/admin/dashboard');
-})->name('admin.dashboard');;
+})->name('admin.dashboard');
 
 /*Route::get('/admin/personnel/new', function () {
     return view('admin.personnel.new');
@@ -35,7 +35,17 @@ Route::resource('/admin/periodPlace','periodPlaceController');
 Route::resource('/admin/quota','QuotaController');
 //Route::resource('/admin/sp1/{id}','spController@execSP');
 
-Route::get('admin/sp1/{id}','spController@execSP')->name('sp');;
+Route::get('admin/sp1/{id}','spController@execSP')->name('sp');
+
+Route::get('/personalpage/dashboard', function () {
+    return view('/personalpage/dashboard');
+})->name('personalpage.dashboard');
+Route::get('personalpage/reservationPlace','PlaceController@reservationPlaceIndex')->name('reservationPlaceIndex');
+Route::get('personalpage/serviceReport','ServiceController@serviceUserReportIndex')->name('serviceReport');
+Route::get('personalpage/payReport','PayController@payUserReportIndex')->name('payReport');
+Route::get('personalpage/creditReport','PayController@creditUserReportIndex')->name('creditReport');
+
+Route::resource('/personalpage/family','FamilyController');
 
 Route::get('/home','HomeController@index'); 
 /*Route::get('/home', function () {
