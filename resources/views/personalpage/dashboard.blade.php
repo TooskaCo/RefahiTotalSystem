@@ -4,6 +4,7 @@
 
 @section('content')
 
+   {{ session(['UserID' => 123])}}
 <h1>
    سامانه مدیریت خدمات
     <small class="text-muted">Version 2.1</small>

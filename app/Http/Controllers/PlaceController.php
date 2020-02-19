@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB ;
 use App\Personnel;
 use App\Place;
+use App\Service ;
+use App\ServiceStatus ;
 use Illuminate\Http\Request;
+use Session;
+use DateTime;
 
 class PlaceController extends Controller
 {
@@ -139,7 +144,47 @@ class PlaceController extends Controller
 
     public function reservationPlaceIndex()
     {
-        return view('personalpage.reservationPlace.list');
+           $data = DB::table('Quota')
+            ->leftJoin('PeriodPlace', 'PeriodPlace.id', '=', 'Quota.Period_Place_ID')
+            ->leftJoin('Period', 'Period.id', '=', 'PeriodPlace.Period_ID')
+            ->leftJoin('Place', 'Place.id', '=', 'PeriodPlace.Place_ID')
+            ->leftJoin('Service', 'Quota.id', '=', 'Service.Quota_ID','Person_ID','=',session('UserID') )
+            ->select('Quota.*','Service.id AS serviceID',DB::raw("CONCAT(Period.Title,' ',Place.Title) AS PeriodPlaceTitle" ))
+            ->orderBy('Quota.created_at','DESC')
+            ->paginate(5);
+           //dd( $data);
+        return view('personalpage.reservationPlace.list',compact('data'))
+            ->with('i', (request()->input('page',1)-1)*5);
+
     }
+
+    public function reservePlaceAction($id)
+    {
+        //$data = Place::findOrFail($id);
+        //dd( session('UserID') );
+        $form_data = array(
+            //'id'=>1,
+            'Person_ID'       =>  session('UserID') ,
+            'Quota_ID'        =>  $id,
+        );
+
+        $service_id = Service::create($form_data)->id;
+
+       // $date = DateTime::createFromFormat('d-m-Y H:i:s',new DateTime('NOW'));
+        //$usableDate = $date->format('Y-m-d H:i:s');
+
+        $form_data = array(
+            'Service_ID'       =>  $service_id ,
+            'StatusType'        =>  1,
+            'StatusTime'        => new DateTime('NOW'), // $usableDate ,
+            'IsLastStatus'        =>  1
+        );
+
+        ServiceStatus::create($form_data);
+
+
+        return redirect('personalpage/reservationPlace')->with('success', 'مکان مورد نظر با موفقیت رزرو شد');
+    }
+
 
 }

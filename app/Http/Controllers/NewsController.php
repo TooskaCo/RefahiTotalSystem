@@ -56,6 +56,17 @@ class NewsController extends Controller
 
         News::create($form_data);
 
+
+
+        /*
+         *
+         * public function store() {
+
+    $input = Request::all();
+    $id = Company::create($input)->id;
+
+    return redirect('company/'.$id);
+}*/
         return redirect('admin\news')->with('success', 'اطلاعات با موفقیت ثبت شد');
     }
 
