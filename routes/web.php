@@ -23,6 +23,14 @@ Route::get('/admin/dashboard', function () {
     return view('admin.personnel.new');
 });*/
 
+Route::get('/admin/login', function () {
+    return view('admin.login');
+});
+
+
+Route::post('admin/loginAction','UserController@loginAction')->name('loginAction');
+Route::get('admin/logoutAction','UserController@logoutAction')->name('logoutAction');
+
 Route::resource('/admin/personnel','PersonnelController');
 //Route::post('/admin/personnel', 'PersonnelController@store')->name('personnel.add');
 //Route::get('/admin/personnel/list', 'PersonnelController@index')->name('personnel.list');
@@ -33,9 +41,19 @@ Route::resource('/admin/place','PlaceController');
 Route::resource('/admin/period','PeriodController');
 Route::resource('/admin/periodPlace','periodPlaceController');
 Route::resource('/admin/quota','QuotaController');
+Route::resource('/admin/users2','UserController');
 //Route::resource('/admin/sp1/{id}','spController@execSP');
 
 Route::get('admin/sp1/{id}','spController@execSP')->name('sp');
+
+
+Route::get('/personalpage/login', function () {
+    return view('personalpage.login');
+});
+
+
+Route::post('personalpage/loginActionGeneralUser','UserController@loginActionGeneralUser')->name('loginActionGeneralUser');
+Route::get('personalpage/logoutActionGeneralUser','UserController@logoutActionGeneralUser')->name('logoutActionGeneralUser');
 
 Route::get('/personalpage/dashboard', function () {
     return view('/personalpage/dashboard');

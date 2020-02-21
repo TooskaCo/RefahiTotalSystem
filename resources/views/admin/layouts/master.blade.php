@@ -14,6 +14,11 @@
 
 </head>
 <body class="rtl">
+@if(!(Session::has('userID') && (Session::get('userID') > 1)))
+    <script type="text/javascript">
+        window.location = "../admin/login";
+    </script>
+@endif
 @include('admin.layouts.header')
 
 

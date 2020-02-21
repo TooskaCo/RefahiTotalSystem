@@ -47,6 +47,9 @@
             <a href="{{ route('quota.index') }}" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">سهمیه بندی</span>
             </a>
+            <a href="{{ route('users2.index') }}" class="list-group-item list-group-item-action bg-submenu ">
+                <span class="menu-collapsed">کاربران</span>
+            </a>
             <a href="#" class="list-group-item list-group-item-action bg-submenu ">
                 <span class="menu-collapsed">گزارشات</span>
             </a>

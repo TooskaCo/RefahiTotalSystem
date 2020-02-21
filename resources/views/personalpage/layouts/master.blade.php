@@ -14,6 +14,12 @@
 
 </head>
 <body class="rtl">
+@if(!(Session::has('userIDGU') && (Session::get('userIDGU') > 1)))
+    <script type="text/javascript">
+        window.location = "../personalpage/login";
+    </script>
+@endif
+
 @include('personalpage.layouts.header')
 
 

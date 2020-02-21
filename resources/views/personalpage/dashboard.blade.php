@@ -4,7 +4,6 @@
 
 @section('content')
 
-   {{ session(['UserID' => 123])}}
 <h1>
    سامانه مدیریت خدمات
     <small class="text-muted">Version 2.1</small>
@@ -12,11 +11,11 @@
 
 
 <div class="card">
-    <h4 class="card-header">امکانات</h4>
+    <h4 class="card-header"></h4>
     <div class="card-body">
         <ul>
-            <li>مدیریت پرسنل</li>
-            <li>مدیریت وظایف</li>
+            <!--li>مدیریت پرسنل</li-->
+            <li> خوش آمدید</li>
         </ul>
     </div>
 </div>

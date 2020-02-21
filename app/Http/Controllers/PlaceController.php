@@ -148,7 +148,7 @@ class PlaceController extends Controller
             ->leftJoin('PeriodPlace', 'PeriodPlace.id', '=', 'Quota.Period_Place_ID')
             ->leftJoin('Period', 'Period.id', '=', 'PeriodPlace.Period_ID')
             ->leftJoin('Place', 'Place.id', '=', 'PeriodPlace.Place_ID')
-            ->leftJoin('Service', 'Quota.id', '=', 'Service.Quota_ID','Person_ID','=',session('UserID') )
+            ->leftJoin('Service', 'Quota.id', '=', 'Service.Quota_ID','Person_ID','=',session('userIDGU') )
             ->select('Quota.*','Service.id AS serviceID',DB::raw("CONCAT(Period.Title,' ',Place.Title) AS PeriodPlaceTitle" ))
             ->orderBy('Quota.created_at','DESC')
             ->paginate(5);
@@ -164,7 +164,7 @@ class PlaceController extends Controller
         //dd( session('UserID') );
         $form_data = array(
             //'id'=>1,
-            'Person_ID'       =>  session('UserID') ,
+            'Person_ID'       =>  session('userIDGU') ,
             'Quota_ID'        =>  $id,
         );
 
