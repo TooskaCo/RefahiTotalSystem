@@ -14,7 +14,7 @@
 
 </head>
 <body class="rtl">
-@if(!(Session::has('userIDGU') && (Session::get('userIDGU') > 1)))
+@if(!(Session::has('userIDGU') && (Session::get('userIDGU') > 0)))
     <script type="text/javascript">
         window.location = "../personalpage/login";
     </script>

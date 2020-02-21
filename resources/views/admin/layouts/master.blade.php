@@ -14,7 +14,7 @@
 
 </head>
 <body class="rtl">
-@if(!(Session::has('userID') && (Session::get('userID') > 1)))
+@if(!(Session::has('userID') && (Session::get('userID') > 0)))
     <script type="text/javascript">
         window.location = "../admin/login";
     </script>
