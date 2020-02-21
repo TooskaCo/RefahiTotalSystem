@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         $request->validate([
             'userName'    =>  'required',
-            'password'     =>  'required',
+            //'password'     =>  'required',
         ]);
 
         $form_data = array(
@@ -110,6 +110,9 @@ class UserController extends Controller
             'IsGeneralUser'=> ($request->isGeneralUser ? 1 : 0 ),
             'IsActive'=> 0,
         );
+
+        if(empty($request->password))
+            unset($form_data['Password']);
 
         Users2::whereId($id)->update($form_data);
         return redirect()->route('users2.edit', $id)->with('success', 'اطلاعات با موفقیت ویرایش شد');

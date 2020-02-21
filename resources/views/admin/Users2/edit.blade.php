@@ -83,7 +83,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-key" ></span></span>
                     </div>
-                    <input type="text" class="form-control" name="password" value="{{ $data->Password }}" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" class="form-control" name="password" value="" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                 </div>
 
             </div>
