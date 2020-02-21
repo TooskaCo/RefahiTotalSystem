@@ -42,8 +42,6 @@
 <body class="rtl">
 
 <div class="container">
-    {{ (Session::get('userFullNameGU')) }}
-    {{ (Session::get('userIDGU')) }}
     @if($errors->any())
         <div class="alert alert-danger mt-2">
             <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
