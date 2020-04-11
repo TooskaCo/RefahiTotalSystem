@@ -158,7 +158,8 @@ class PeriodController extends Controller
         $data = DB::table('PeriodPlace')
             ->join('Quota', 'Quota.Period_Place_ID', '=', 'PeriodPlace.id')
             ->join('Service', 'Quota.id', '=', 'Service.Quota_ID')
-            ->join('Personnel', 'Personnel.id', '=', 'Service.Person_ID')
+            ->join('Users2', 'Users2.id', '=', 'Service.Person_ID')
+            ->join('Personnel', 'Personnel.NationalNumber', '=', 'Users2.NationalNumber')
             ->select('PeriodPlace.*','Quota.FromDate','Quota.ToDate', DB::raw("CONCAT(Personnel.FirstName,' ',Personnel.LastName) as PersonName"))
             ->where('PeriodPlace.id', $periodPlace_id)
             ->get();
