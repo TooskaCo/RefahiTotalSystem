@@ -16,7 +16,7 @@
 <body class="rtl">
 @if(!(Session::has('userID') && (Session::get('userID') > 0)))
     <script type="text/javascript">
-        window.location = "../admin/login";
+        window.location = "{{ url('/admin/login') }}";
     </script>
 @endif
 @include('admin.layouts.header')

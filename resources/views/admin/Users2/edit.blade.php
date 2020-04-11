@@ -60,6 +60,17 @@
 
         </div>
 
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <div class="row" >
+                    <label for="meliCode" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >کد ملی</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control form-control-sm" name="meliCode" value="{{ $data->NationalNumber }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <div class="form-row">
         <div class="form-group col-md-4">
             <div class="row" >

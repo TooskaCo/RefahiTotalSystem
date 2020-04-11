@@ -39,6 +39,7 @@ Route::resource('/admin/personnel','PersonnelController');
 Route::resource('/admin/news','NewsController');
 Route::resource('/admin/place','PlaceController');
 Route::resource('/admin/period','PeriodController');
+Route::get('/admin/period/{id}/reserviha/{id2}','PeriodController@reservihaShow')->name('periodPlaceReserviha');
 Route::resource('/admin/periodPlace','periodPlaceController');
 Route::resource('/admin/quota','QuotaController');
 Route::resource('/admin/users2','UserController');

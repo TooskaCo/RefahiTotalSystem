@@ -151,4 +151,18 @@ class PeriodController extends Controller
         $data->delete();
         return redirect('admin/period')->with('success', 'اطلاعات با موفقیت حذف شد');
     }
+
+    public function reservihaShow($period_id,$periodPlace_id)
+    {
+        //dd($period_id);
+        $data = DB::table('PeriodPlace')
+            ->join('Quota', 'Quota.Period_Place_ID', '=', 'PeriodPlace.id')
+            ->join('Service', 'Quota.id', '=', 'Service.Quota_ID')
+            ->join('Personnel', 'Personnel.id', '=', 'Service.Person_ID')
+            ->select('PeriodPlace.*','Quota.FromDate','Quota.ToDate', DB::raw("CONCAT(Personnel.FirstName,' ',Personnel.LastName) as PersonName"))
+            ->where('PeriodPlace.id', $periodPlace_id)
+            ->get();
+
+        return view('admin.period.reserviha', compact('data'));
+    }
 }
