@@ -155,7 +155,6 @@ class PeriodController extends Controller
     public function reservihaShow($period_id,$periodPlace_id)
     {
         //dd($period_id);
-        //
         $data = DB::table('PeriodPlace')
             ->join('Quota', 'Quota.Period_Place_ID', '=', 'PeriodPlace.id')
             ->join('Service', 'Quota.id', '=', 'Service.Quota_ID')

@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title' ,'اخبار')
+@section('title' ,'بستگان')
 
 @section('content')
 
@@ -26,7 +26,7 @@
 
     <div class="form_header bg-info">
         <span id="collapse-icon" class="fa fa-newspaper fa-2x mr-2" ></span>
-        <span class="h5">اخبار</span>
+        <span class="h5">اطلاعات بستگان</span>
         <!--button type="button" class="btn bg-white float-left mx-2">ذخیره</button>
         <button type="button" class="btn btn-success float-left mx-2 ">لیست</button-->
     </div>
@@ -35,7 +35,7 @@
             <button type="button" class="btn btn-primary">ذخیره</button>
             <button type="button" class="btn btn-primary">لیست</button>
     </div-->
-    <form class="well form-horizontal" method="post" action="{{ route('news.update', $data->id) }}" enctype="multipart/form-data">
+    <form class="well form-horizontal" method="post" action="{{ route('family.update', $data->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form_container">
@@ -47,48 +47,53 @@
             </div>
             </div-->
             <div class="form-row">
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-4">
                     <div class="row" >
-                        <label for="firstName" class="col-md-2 col-form-label text-md-right text-sm-left pr-0" >عنوان</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control form-control-sm" id="title" name="title" value="{{ $data->Title }}">
+                        <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نام</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control form-control-sm" id="title" name="firstName" value="{{ $data->FirstName }}">
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-md-4">
+                    <div class="row" >
+                        <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نام خانوادگی</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control form-control-sm" id="title" name="lastName" value="{{ $data->LastName }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <div class="row" >
+                        <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >کد ملی</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control form-control-sm" id="title" name="nationalCode" value="{{ $data->LastName }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="row" >
+                        <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pl-0" >شماره شناسنامه</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control form-control-sm" id="title" name="identificationNumber" value="{{ $data->LastName }}">
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <div class="row" >
-                        <div class="col-md-4 pr-0"><span class=" text-md-right text-sm-left float-left pt-2" >تاریخ</span></div>
+                        <div class="col-md-3 pr-0"><span class=" text-md-right text-sm-left float-left pt-2" >تاریخ تولد</span></div>
                         <div class="input-group input-group-sm col-md-8">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-calendar-alt cursor-pointer" id='icoDate'></span></span>
                             </div>
-                            <input type="text" name="date" id="txtDate" class="form-control" value="{{ $data->Date }}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <div class="row" >
-                        <label for="subject" class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >موضوع</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control form-control-sm" name="subject" value="{{ $data->Subject }}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <div class="row" >
-                        <label for="address" class="col-md-1 col-form-label text-md-right text-sm-left pr-0" >توضیحات</label>
-                        <div class="col-md-11">
-                            <textarea class="form-control" rows="4" name="description" >{{ $data->Description }}</textarea>
+                            <input type="text" name="birthDate" id="txtDate" value="{{ $data->BirthDate }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -98,23 +103,39 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <div class="row" >
-                        <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >حالت</label>
+                        <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نوع وابستگی</label>
                         <div class="col-md-8">
-                            <select class="custom-select custom-select-sm" name="isActive">
-                                <option selected value="0" >انتخاب کنید</option>
-                                <option value="true" {{ ($data->IsActive == true) ? "selected" : "" }}>فعال</option>
-                                <option value="false" {{ ($data->IsActive == false) ? "selected" : "" }}>غیرفعال</option>
+                            <select class="custom-select custom-select-sm" name="relativeType">
+                                <option selected value="0">انتخاب کنید</option>
+                                <option value="1" {{ ($data->RelativeType == 1) ? "selected" : "" }}>پدر</option>
+                                <option value="2" {{ ($data->RelativeType == 2) ? "selected" : "" }}>مادر</option>
+                                <option value="3" {{ ($data->RelativeType == 3) ? "selected" : "" }} >همسر</option>
+                                <option value="4" {{ ($data->RelativeType == 4) ? "selected" : "" }} >فرزندان</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="row" >
+                        <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تحت تکلف بودن</label>
+                        <div class="col-md-8">
+                            <select class="custom-select custom-select-sm" name="isDependent">
+                                <option selected value="0">انتخاب کنید</option>
+                                <option value="true" {{ ($data->IsDependent == true) ? "selected" : "" }}>بلی</option>
+                                <option value="false" {{ ($data->IsDependent == false) ? "selected" : "" }}>خیر</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
 
+
         </div>
 
         <div class="form_buttons_bar row my-2 py-2" >&nbsp;
             <div class=" col">
-                <a href="{{ route('news.index') }}" ><button type="button" class="btn btn-primary float-left mx-1 px-4">لیست</button></a>
+                <a href="{{ route('family.index') }}" ><button type="button" class="btn btn-primary float-left mx-1 px-4">لیست</button></a>
                 <button type="submit" class="btn btn-primary float-left mx-1 px-4">ذخیره</button>
             </div>
         </div>

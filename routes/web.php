@@ -66,7 +66,7 @@ Route::get('personalpage/creditReport','PayController@creditUserReportIndex')->n
 
 Route::post('/personalpage/reservationPlace/reserve/{id}', 'PlaceController@reservePlaceAction')->name('reservePlaceAction');
 
-Route::resource('/personalpage/family','FamilyController');
+Route::resource('/personalpage/family','RelativeController');
 
 Route::get('/home','HomeController@index'); 
 /*Route::get('/home', function () {

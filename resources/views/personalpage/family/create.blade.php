@@ -29,7 +29,7 @@
         <button type="button" class="btn btn-primary">ذخیره</button>
         <button type="button" class="btn btn-primary">لیست</button>
 </div-->
-<form class="well form-horizontal" method="post" action="{{ route('news.store') }}" enctype="multipart/form-data">
+<form class="well form-horizontal" method="post" action="{{ route('family.store') }}" enctype="multipart/form-data">
     @csrf
 <div class="form_container">
 
@@ -46,7 +46,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نام</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="">
+                    <input type="text" class="form-control form-control-sm" id="title" name="firstName" value="">
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نام خانوادگی</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="">
+                    <input type="text" class="form-control form-control-sm" id="title" name="lastName" value="">
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >کد ملی</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="">
+                    <input type="text" class="form-control form-control-sm" id="nationalCode" name="nationalCode" value="">
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             <div class="row" >
                 <label for="firstName" class="col-md-3 col-form-label text-md-right text-sm-left pl-0" >شماره شناسنامه</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control form-control-sm" id="title" name="title" value="">
+                    <input type="text" class="form-control form-control-sm" id="title" name="identificationNumber" value="">
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><span class="fa fa-calendar-alt cursor-pointer" id='icoDate'></span></span>
                     </div>
-                    <input type="text" name="date" id="txtDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
+                    <input type="text" name="birthDate" id="txtDate" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="direction: ltr !important" placeholder="">
                 </div>
             </div>
         </div>
@@ -98,12 +98,12 @@
             <div class="row" >
                 <label class="col-md-3 col-form-label text-md-right text-sm-left pr-0" >نوع وابستگی</label>
                 <div class="col-md-8">
-                    <select class="custom-select custom-select-sm" name="genderType">
+                    <select class="custom-select custom-select-sm" name="relativeType">
                         <option selected value="0">انتخاب کنید</option>
                         <option value="1">پدر</option>
                         <option value="2">مادر</option>
-                        <option value="2">همسر</option>
-                        <option value="2">فرزندان</option>
+                        <option value="3">همسر</option>
+                        <option value="4">فرزندان</option>
                     </select>
                 </div>
             </div>
@@ -113,10 +113,10 @@
             <div class="row" >
                 <label class="col-md-4 col-form-label text-md-right text-sm-left pr-0" >تحت تکلف بودن</label>
                 <div class="col-md-8">
-                    <select class="custom-select custom-select-sm" name="maritalStatus">
+                    <select class="custom-select custom-select-sm" name="isDependent">
                         <option selected value="0">انتخاب کنید</option>
-                        <option value="1">بلی</option>
-                        <option value="2">خیر</option>
+                        <option value="true">بلی</option>
+                        <option value="false">خیر</option>
                     </select>
                 </div>
             </div>

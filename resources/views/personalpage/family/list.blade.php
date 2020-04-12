@@ -65,49 +65,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>علی محمدی</td>
-                    <td>4896251463</td>
-                    <td>
-                        <form >
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('family.create') }}" style="color: #333333" ><button type="button" class="btn btn-success btn-sm"><span id="collapse-icon" class="fa fa-edit" ></span></button></a>
-                            <button type="button" class="btn btn-danger btn-sm" ><span id="collapse-icon" class="fa fa-trash" ></span></button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>سارا محمدی</td>
-                    <td>4896251464</td>
-                    <td>
-                        <form >
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('family.create') }}" style="color: #333333" ><button type="button" class="btn btn-success btn-sm"><span id="collapse-icon" class="fa fa-edit" ></span></button></a>
-                            <button type="button" class="btn btn-danger btn-sm" ><span id="collapse-icon" class="fa fa-trash" ></span></button>
-                        </form>
-                    </td>
-                </tr>
+
                 @php
                     $index = 1 ;
                 @endphp
                 @foreach($data as $row)
-                <tr>
-                    <th scope="row">{{ $index++ }}</th>
-                    <td>{{ $row->Title }}</td>
-                    <td>{{ $row->Date }}</td>
-                    <td>
-                        <form id="frm_{{$row->id}}" action="{{ route('news.destroy', $row->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('news.edit', $row->id) }}" style="color: #333333" ><button type="button" class="btn btn-success btn-sm"><span id="collapse-icon" class="fa fa-edit" ></span></button></a>
-                            <button type="button" class="btn btn-danger btn-sm" data-recordid="{{ $row->id }}" data-toggle="modal" data-target="#confirm-delete"   ><span id="collapse-icon" class="fa fa-trash" ></span></button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <th scope="row">{{ $index++ }}</th>
+                        <td>{{ $row->FirstName .' '. $row->LastName }}</td>
+                        <td>{{ $row->NationalNumber }}</td>
+                        <td>
+
+                            <form id="frm_{{$row->id}}" action="{{ route('family.destroy', $row->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <a href="{{ route('family.edit', $row->id) }}" style="color: #333333" ><button type="button" class="btn btn-success btn-sm"><span id="collapse-icon" class="fa fa-edit" ></span></button></a>
+                                <button type="button" class="btn btn-danger btn-sm" data-recordid="{{ $row->id }}" data-toggle="modal" data-target="#confirm-delete"   ><span id="collapse-icon" class="fa fa-trash" ></span></button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
 
                 </tbody>

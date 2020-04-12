@@ -14,6 +14,7 @@ class FamilyController extends Controller
     public function index()
     {
         //return view('admin.place.list');
+		////
         $data = array();// News::latest()->paginate(5);
         return view('personalpage.family.list',compact('data'))
             ->with('i', (request()->input('page',1)-1)*5);
